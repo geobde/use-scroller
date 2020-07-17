@@ -1,72 +1,45 @@
-## useClickAway.
+## useScroller.
 
-React hook to detect click or touch events outside an element.
-
-![Alt text](https://github.com/geobde/use-click-away/blob/master/animation.gif "Search")
+React hook that automatically adds the next page, saving users from a full page load.
 
 ## Installation
 
 ```
-npm i use-click-away
+npm i use-scroller
 ```
 
 ## Usage
 
-### Modal Example
+### Example
 
 ```
 import React from "react";
-import { useClickAway } from "use-click-away";
+import { useScroller } from "use-scroller";
 
 export default () => {
-  const [modal, setModal] = React.useState(false);
+  const [moreContent, setMoreContent] = React.useState(false);
+  const [page, loaderRef, scrollerRef] = useInfiniteScroll( moreContent );
 
-  const onClickOutside = () => {
-    setModal(false);
-  };
-  return (
-    <div className="container">
-      <button onClick={() => setModal(true)}>Show Property</button>
-      <Modal
-        modal={modal}
-        setModal={setModal}
-        onClickOutside={onClickOutside}
-      />
-    </div>
-  );
-};
-
-const Modal = ({ modal, setModal, onClickOutside }) => {
-  const clickRef = React.useRef("");
-  useClickAway(clickRef, onClickOutside);
+    React.useEffect(() => {
+     services.api.getData()
+       .then((api:AxiosResponse<TestResponse>) =>   {
+             setHasMore(true);
+       });
+  }, [page]);
 
   return (
-    modal && (
-      <div className="shadow">
-        <div ref={clickRef} className="modal">
-          <iframe
-            width="800"
-            height="600"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-74.00082707405092%2C40.73125075736151%2C-73.99181485176088%2C40.73703099445825&amp;layer=mapnik&amp;marker=40.73414093868234%2C-73.99632096290588"
-          />
+      <div  ref={scrollerRef}>
 
-          <div onClick={() => setModal(false)} className="close">
-            X
-          </div>
-        </div>
-      </div>
-    )
+      {data.map((item: any, index: number) => (
+          <div>Infinite Scroll Item</div>
+      ))};
+
+      {hasMore && <div ref={loaderRef}></div>}
+      <div>
   );
 };
-
 
 ```
-[![Edit use-click-away](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/use-click-away-ipxgh?fontsize=14&hidenavigation=1&theme=dark)
-
 ## Built With
 
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
