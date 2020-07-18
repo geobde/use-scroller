@@ -10,7 +10,7 @@ Using `npm`:
 npm i use-scroller --save
 ```
 
-[live DEMO](https://reactmoviestore.netlify.app/).
+[Check the live DEMO](https://reactmoviestore.netlify.app/).
 
 ## Usage
 
