@@ -7,7 +7,7 @@ React hook `useScroller()` that automatically adds the next page, saving users f
 Using `npm`:
 
 ```bash
-npm i use-position --save
+npm i use-scroller --save
 ```
 
 ## Usage
