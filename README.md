@@ -10,6 +10,8 @@ Using `npm`:
 npm i use-scroller --save
 ```
 
+[live DEMO](https://reactmoviestore.netlify.app/).
+
 ## Usage
 
 Import the hook:
