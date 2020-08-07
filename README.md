@@ -28,13 +28,10 @@ import React from "react";
 export default () => {
   const [data, setData] = React.useState([]);
   const [moreContent, setMoreContent] = React.useState(false);
-  const [page, loaderRef, scrollerRef] = useInfiniteScroll( moreContent );
+  const [page, loaderRef, scrollerRef] = useScroller( moreContent );
 
     React.useEffect(() => {
-     services.api.getData().then((api:AxiosResponse<TestResponse>) => {
-        setHasMore(res.hasMoreContent);
-        setData(res.data);
-      });
+     
   }, [page]);
 
   return (
@@ -42,11 +39,10 @@ export default () => {
       {data.map((item, index) => (
           <div>Infinite Scroll Item</div>
       ))};
-      {hasMore && <div ref={loaderRef}></div>}
-      <div>
+      {moreContent && <div ref={loaderRef}></div>}
+      </div>
   );
 };
-
 ```
 
 ## Specification
